@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <title>16X time</title>
+</head>
+<body>
+    <div class="center">
+        <div id="hex"></div>
+    </div>
+    <button onclick="transformToTime()">Transform to Time</button>
+</body>
+
+<script>
+function refreshData()
+{
+    x = 1;
+ 	let d = new Date()
+ 	let h = d.getHours();
+ 	let m = d.getMinutes();
+ 	let s = d.getSeconds();
+
+ 	if (h<=9) {h = '0'+h};
+ 	if (m<=9) {m = '0'+m};
+	if (s<=9) {s = '0'+s};
+
+ 	let	color = '#'+h+m+s;
+	$("body").css("background-color", color );
+	if(transformed){
+	        let hexValue = $("div#hex").text();
+            let formattedTime = h + ':' + m + ':' + s;
+            $("div#hex").text(formattedTime);
+	}else{
+	    $("div#hex").text(color);
+	}
+
+
+    setTimeout(refreshData, x*1000);
+}
+function transformToTime() {
+            if(transformed == false){
+            transformed = true
+            }else{
+            transformed = false
+            }
+        }
+
+let transformed = false;
+
+refreshData();
+</script>
+<style>
+body{
+width:100%;
+height:100%;
+}
+
+.center{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        color:black;
+}
+</style>
+</html>
